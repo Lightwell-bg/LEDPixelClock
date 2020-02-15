@@ -8,44 +8,37 @@ The LED Pixel Clock is a four digit clock made up of 30 WS2811 addressable LEDs 
 
 # Features include:
 - Always precise time because of synchronization with NTP time servers
-- High display brightness 
 - Indoor temperature, humidity and barometric pressure measurement
 - Sending temperature, humidity and barometric pressure data to MQTT and Thingspeak.com server
-- Getting a weather information and forecast for your city (temperature, barometric pressure, humidity, cloud and wind structure) 
-- Output of any predetermined information in the form of a creeping line
-- Remote transmission of any text messages via MQTT server and it’s output on the clock
 - No buttons – control the clock via WEB-interface from PC, tablet or smartphone
-- Brightness and output speed of adjustment
+- High display brightness
+- Seven colors to display information
+- Brightness adjustment
 - Two alarm clocks
 - Firmware update via Wi-Fi
 - Information display on 3 languages: English, Russian, Bulgarian
-- Three types of case material: PETG plastic, acryl and wood 
+- An option to install different alternative Open Source firmware
 - Powered via USB
-- Normal USB port or phone charger
-- An option to install different alternative Open Source firmware, designed to MAX7912 matrix control
 - Hackable: Open source hardware and firmware, Displays information read via UART
 
+
 ## Required Parts:
-- Wemos D1 Mini: http://got.by/40d3u7 
-- Dot Matrix Module MAX7219: http://got.by/40da6v 
-- BME280 Digital Sensor (Temperature, Humidity, Barometric Pressure) 5V: http://got.by/40d52x 
-- TTP223B digital touch capacitive  sensor: http://got.by/40d6kz
+- Wemos D1 Mini: http://got.by/40d3u7
+- RGB LED with WS2811 8mm http://ali.pub/4h4ehf
+- BME280 Digital Sensor (Temperature, Humidity, Barometric Pressure) 5V: http://got.by/40d52x
+- TTP223B digital touch capacitive sensor: http://got.by/40d6kz
 - DS3231 AT24C32 IIC Module Precision Clock http://got.by/42k10g
 - Active Buzzer http://got.by/42k1sg
-- Micro USB Cable: http://got.by/40dbf7 
-- Vinyl Smoke Film Sheet http://got.by/43vkl6
 
 Note: Using the links provided here help to support these types of projects. Thank you for the support.
 
 **You can purchase a PCB with soldered elements and connectors for connecting the indicator and sensors, or just a PCB and a set of elements for installation**
-https://diy.led-lightwell.eu/product/lw-multifunctional-clock-kit/
+https://diy.led-lightwell.eu/
 
 ## Schematics / Assembly
 | Component  | Pins  |  Wemos D1 Mini |
 | ------------ | ------------ | ------------ |
-| **Dot Matrix Module MAX7219**  |  CS -->|D0 (GPIO16)|
-||CLK -->|D5 (GPIO14)|
-||DIN -->|D7 (GPIO13)|
+| **RGB LED with WS2811**  |  Din -->|D5 (GPIO14)|
 ||+5V -->||
 ||GND --> |   |
 |**DS3231**|SCL -->|D1 (GPIO5)|
@@ -61,18 +54,9 @@ https://diy.led-lightwell.eu/product/lw-multifunctional-clock-kit/
 |**TTP223B digital touch capacitive  sensor**|Dout -->|D6 (GPIO12)|
 ||+5V||
 ||GND||
-|**I2C**|CS|D0 (GPIO16)|
-||CLK|D5 (GPIO14)|
-|**UART**|Tx|TX (GPIO1)|
-||Rx|RX (GPIO3)|
 
-[![](https://github.com/Lightwell-bg/LWClock/blob/master/images/Board-sm.png)](https://github.com/Lightwell-bg/LWClock/blob/master/images/Board.png)
 
-1. Solder the elements on the printed circuit board according to the circuit diagram, instructions and markings placed on the printed circuit board.
-2. Connect the Matrix MAX7219 indicator modules, BME280, Buzzer and TTP223B digital touch capacitive sensor using soldering or connectors.
-3. Fasten the circuit board to the back of the Matrix MAX7219 LED Display Modules using M3 screws and plastic washers.
-4. If you use more than four MAX7219 modules, ALWAYS connect an external 5V power supply with a capacity of 330 mA per each 8x8 module.
-5. To download the sketch and files, connect the device to the computer via USB cable.
+
 
 ## Compiling and Loading to Wemos D1 / Installation
 
