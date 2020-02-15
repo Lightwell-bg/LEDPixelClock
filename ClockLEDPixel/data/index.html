@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+        <meta http-equiv = "Content-type" content = "text/html; charset=utf-8">
+        <title>LED Clock</title>
+        <link rel="icon" href="./img/favicon.png" type="images/png">
+        <link rel = "stylesheet" type = "text/css" href = "/style.css">
+        <script type = "text/javascript" src = "/function.js"></script>
+        <script type = "text/javascript" src = "/lang_RU.js"></script>
+        <script type = "text/javascript" src = "/lang_BG.js"></script>
+        <script type = "text/javascript" src = "/lang_EN.js"></script>
+        <script type = "text/javascript">
+            function set_ledoption(submit) {
+				server = "/ledoption?isLedClock=" + val_sw('isLedClock') + "&isLedDate=" + val_sw('isLedDate') + "&isLedTemp=" + val_sw('isLedTemp');
+				server += "&isLedHum=" + val_sw('isLedHum') + "&isLedPres=" + val_sw('isLedPres');
+				server += "&clockFrom=" + val('clockFrom') + "&clockTo=" + val('clockTo') + "&dateFrom=" + val('dateFrom')  + "&dateTo=" + val('dateTo');
+				server += "&tempFrom=" + val('tempFrom') + "&tempTo=" + val('tempTo') + "&humFrom=" + val('humFrom') + "&humTo=" + val('humTo');
+				server += "&presFrom=" + val('presFrom') + "&presTo=" + val('presTo')
+				server += "&clockColor=" + val('clockColor') + "&dateColor=" + val('dateColor') + "&tempColor=" + val('tempColor');
+				server += "&humColor=" + val('humColor') + "&presColor=" + val('presColor');
+				server += "&onlyClockNight=" + val_sw('onlyClockNight');
+				server += "&global_start=" + val('global_start') + "&global_stop=" + val('global_stop');
+                send_request(submit,server);
+				alert("Ok");
+            }	
+			function set_led(submit) {
+				server = "/ledsetup?brightd=" + val('brightd') + "&brightn=" + val('brightn');
+				server += "&dmodefrom=" + val('dmodefrom') + "&dmodeto=" + val('dmodeto') + "&autoBright=" + val_sw('autoBright');
+                send_request(submit,server);
+				alert("Ok");
+            }		
+        </script>
+        
+    </head>
+    <body onload = "load();">
+        <header>
+            <span class="opt_cn" id="header"></span><br>
+            <span class="opt_cn" id="P_time_informer"></span>
+            <span id="time">{{time}}</span><br>
+			<span id="ver">{{cVersion}}</span><br>
+			<span id="temp">{{temp_now}} {{hum_now}}</span>
+        </header>       
+        <central-unit>
+            <div class="menu_unit">
+                <a class="link__img" href="/index.html"><span class="ico__text">Screen</span></a>			
+                <a class="link__img" href="/wifi.html"><span class="ico__text">Wifi</span></a>
+                <a class="link__img" href="/time.html"><span class="ico__text">Time</span></a>
+                <a class="link__img" href="/setup.html"><span class="ico__text">Setup</span></a>
+                <a class="link__img" href="/help.html"><span class="ico__text">Help</span></a>
+                <a class="link__img" href="#"><span class="ico__text" onclick="restart(this,'ResetESP?');">Restart</span></a>
+            </div>
+            <div id="main_unit">
+				<titles>
+					<div class="opt_cn" id="P_led_title"></div>
+				</titles>
+                <paragraph><span class="opt_cn" id="P_led_set"></span></paragraph>
+                    <center>
+                        <table id="table__font">
+                        <tr>
+                            <td><span class="opt_cn" id="P_led_infOn">On</span></td>
+                            <td><span class="opt_cn" id="P_led_infFrom">From</span></td>
+							<td><span class="opt_cn" id="P_led_infTo">To</span></td>
+							<td><span class="opt_cn" id="P_led_color">Color</span></td>
+							<td></td>
+                            <tr>  
+                                <td><input type="checkbox" id="isLedClock"></td>	
+                            <td>
+                                <select id="clockFrom">
+									<option value="0"> 00:00 </option>
+									<option value="0.3"> 00:30 </option>
+									<option value="1"> 01:00 </option>
+									<option value="1.3"> 01:30 </option>
+									<option value="2"> 02:00 </option>
+									<option value="2.3"> 02:30 </option>
+									<option value="3"> 03:00 </option>
+									<option value="3.3"> 03:30 </option>
+									<option value="4"> 04:00 </option>
+									<option value="4.3"> 04:30 </option>
+									<option value="5"> 05:00 </option>
+									<option value="5.3"> 05:30 </option>
+									<option value="6"> 06:00 </option>
+									<option value="6.3"> 06:30 </option>
+									<option value="7"> 07:00 </option>
+									<option value="7.3"> 07:30 </option>
+									<option value="8"> 08:00 </option>
+									<option value="8.3"> 08:30 </option>
+									<option value="9"> 09:00 </option>
+									<option value="9.3"> 09:30 </option>
+									<option value="10"> 10:00 </option>
+									<option value="10.3"> 10:30 </option>
+									<option value="11"> 11:00 </option>
+									<option value="11.3"> 11:30 </option>
+									<option value="12"> 12:00 </option>
+									<option value="12.3"> 12:30 </option>
+									<option value="13"> 13:00 </option>
+									<option value="13.3"> 13:30 </option>
+									<option value="14"> 14:00 </option>
+									<option value="14.3"> 14:30 </option>
+									<option value="15"> 15:00 </option>
+									<option value="15.3"> 15:30 </option>
+									<option value="16"> 16:00 </option>
+									<option value="16.3"> 16:30 </option>
+									<option value="17"> 17:00 </option>
+									<option value="17.3"> 17:30 </option>
+									<option value="18"> 18:00 </option>
+									<option value="18.3"> 18:30 </option>
+									<option value="19"> 19:00 </option>
+									<option value="19.3"> 19:30 </option>
+									<option value="20"> 20:00 </option>
+									<option value="20.3"> 20:30 </option>
+									<option value="21"> 21:00 </option>
+									<option value="21.3"> 21:30 </option>
+									<option value="22"> 22:00 </option>
+									<option value="22.3"> 22:30 </option>
+									<option value="23"> 23:00 </option>
+									<option value="23.3"> 23:30 </option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="clockTo">
+									<option value="0.3"> 00:30 </option>
+									<option value="1"> 01:00 </option>
+									<option value="1.3"> 01:30 </option>
+									<option value="2"> 02:00 </option>
+									<option value="2.3"> 02:30 </option>
+									<option value="3"> 03:00 </option>
+									<option value="3.3"> 03:30 </option>
+									<option value="4"> 04:00 </option>
+									<option value="4.3"> 04:30 </option>
+									<option value="5"> 05:00 </option>
+									<option value="5.3"> 05:30 </option>
+									<option value="6"> 06:00 </option>
+									<option value="6.3"> 06:30 </option>
+									<option value="7"> 07:00 </option>
+									<option value="7.3"> 07:30 </option>
+									<option value="8"> 08:00 </option>
+									<option value="8.3"> 08:30 </option>
+									<option value="9"> 09:00 </option>
+									<option value="9.3"> 09:30 </option>
+									<option value="10"> 10:00 </option>
+									<option value="10.3"> 10:30 </option>
+									<option value="11"> 11:00 </option>
+									<option value="11.3"> 11:30 </option>
+									<option value="12"> 12:00 </option>
+									<option value="12.3"> 12:30 </option>
+									<option value="13"> 13:00 </option>
+									<option value="13.3"> 13:30 </option>
+									<option value="14"> 14:00 </option>
+									<option value="14.3"> 14:30 </option>
+									<option value="15"> 15:00 </option>
+									<option value="15.3"> 15:30 </option>
+									<option value="16"> 16:00 </option>
+									<option value="16.3"> 16:30 </option>
+									<option value="17"> 17:00 </option>
+									<option value="17.3"> 17:30 </option>
+									<option value="18"> 18:00 </option>
+									<option value="18.3"> 18:30 </option>
+									<option value="19"> 19:00 </option>
+									<option value="19.3"> 19:30 </option>
+									<option value="20"> 20:00 </option>
+									<option value="20.3"> 20:30 </option>
+									<option value="21"> 21:00 </option>
+									<option value="21.3"> 21:30 </option>
+									<option value="22"> 22:00 </option>
+									<option value="22.3"> 22:30 </option>
+									<option value="23"> 23:00 </option>
+									<option value="23.3"> 23:30 </option>
+									<option value="24"> 24:00 </option>
+                                </select>
+							</td>
+							<td>
+                                <select id="clockColor">
+									<option value="1"> Red </option>
+									<option value="2"> Orange </option>
+									<option value="3"> Yellow </option>
+									<option value="4"> Green </option>
+									<option value="5"> Gyan </option>
+									<option value="6"> Blue </option>
+									<option value="7"> Purple </option>
+									<option value="8"> White </option>
+                                </select>
+                            </td>										
+                                <td align = "left"><span class="opt_cn" id="P_led_clock"></span></td>
+                            </tr>
+                            <tr>  
+                                <td><input type="checkbox" id="isLedDate"></td>	
+                            <td>
+                                <select id="dateFrom">
+									<option value="0"> 00:00 </option>
+									<option value="0.3"> 00:30 </option>
+									<option value="1"> 01:00 </option>
+									<option value="1.3"> 01:30 </option>
+									<option value="2"> 02:00 </option>
+									<option value="2.3"> 02:30 </option>
+									<option value="3"> 03:00 </option>
+									<option value="3.3"> 03:30 </option>
+									<option value="4"> 04:00 </option>
+									<option value="4.3"> 04:30 </option>
+									<option value="5"> 05:00 </option>
+									<option value="5.3"> 05:30 </option>
+									<option value="6"> 06:00 </option>
+									<option value="6.3"> 06:30 </option>
+									<option value="7"> 07:00 </option>
+									<option value="7.3"> 07:30 </option>
+									<option value="8"> 08:00 </option>
+									<option value="8.3"> 08:30 </option>
+									<option value="9"> 09:00 </option>
+									<option value="9.3"> 09:30 </option>
+									<option value="10"> 10:00 </option>
+									<option value="10.3"> 10:30 </option>
+									<option value="11"> 11:00 </option>
+									<option value="11.3"> 11:30 </option>
+									<option value="12"> 12:00 </option>
+									<option value="12.3"> 12:30 </option>
+									<option value="13"> 13:00 </option>
+									<option value="13.3"> 13:30 </option>
+									<option value="14"> 14:00 </option>
+									<option value="14.3"> 14:30 </option>
+									<option value="15"> 15:00 </option>
+									<option value="15.3"> 15:30 </option>
+									<option value="16"> 16:00 </option>
+									<option value="16.3"> 16:30 </option>
+									<option value="17"> 17:00 </option>
+									<option value="17.3"> 17:30 </option>
+									<option value="18"> 18:00 </option>
+									<option value="18.3"> 18:30 </option>
+									<option value="19"> 19:00 </option>
+									<option value="19.3"> 19:30 </option>
+									<option value="20"> 20:00 </option>
+									<option value="20.3"> 20:30 </option>
+									<option value="21"> 21:00 </option>
+									<option value="21.3"> 21:30 </option>
+									<option value="22"> 22:00 </option>
+									<option value="22.3"> 22:30 </option>
+									<option value="23"> 23:00 </option>
+									<option value="23.3"> 23:30 </option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="dateTo">
+									<option value="0.3"> 00:30 </option>
+									<option value="1"> 01:00 </option>
+									<option value="1.3"> 01:30 </option>
+									<option value="2"> 02:00 </option>
+									<option value="2.3"> 02:30 </option>
+									<option value="3"> 03:00 </option>
+									<option value="3.3"> 03:30 </option>
+									<option value="4"> 04:00 </option>
+									<option value="4.3"> 04:30 </option>
+									<option value="5"> 05:00 </option>
+									<option value="5.3"> 05:30 </option>
+									<option value="6"> 06:00 </option>
+									<option value="6.3"> 06:30 </option>
+									<option value="7"> 07:00 </option>
+									<option value="7.3"> 07:30 </option>
+									<option value="8"> 08:00 </option>
+									<option value="8.3"> 08:30 </option>
+									<option value="9"> 09:00 </option>
+									<option value="9.3"> 09:30 </option>
+									<option value="10"> 10:00 </option>
+									<option value="10.3"> 10:30 </option>
+									<option value="11"> 11:00 </option>
+									<option value="11.3"> 11:30 </option>
+									<option value="12"> 12:00 </option>
+									<option value="12.3"> 12:30 </option>
+									<option value="13"> 13:00 </option>
+									<option value="13.3"> 13:30 </option>
+									<option value="14"> 14:00 </option>
+									<option value="14.3"> 14:30 </option>
+									<option value="15"> 15:00 </option>
+									<option value="15.3"> 15:30 </option>
+									<option value="16"> 16:00 </option>
+									<option value="16.3"> 16:30 </option>
+									<option value="17"> 17:00 </option>
+									<option value="17.3"> 17:30 </option>
+									<option value="18"> 18:00 </option>
+									<option value="18.3"> 18:30 </option>
+									<option value="19"> 19:00 </option>
+									<option value="19.3"> 19:30 </option>
+									<option value="20"> 20:00 </option>
+									<option value="20.3"> 20:30 </option>
+									<option value="21"> 21:00 </option>
+									<option value="21.3"> 21:30 </option>
+									<option value="22"> 22:00 </option>
+									<option value="22.3"> 22:30 </option>
+									<option value="23"> 23:00 </option>
+									<option value="23.3"> 23:30 </option>
+									<option value="24"> 24:00 </option>
+                                </select>
+							</td>
+							<td>
+                                <select id="dateColor">
+									<option value="1"> Red </option>
+									<option value="2"> Orange </option>
+									<option value="3"> Yellow </option>
+									<option value="4"> Green </option>
+									<option value="5"> Gyan </option>
+									<option value="6"> Blue </option>
+									<option value="7"> Purple </option>
+									<option value="8"> White </option>
+                                </select>
+                            </td>													
+                                <td align = "left"><span class="opt_cn" id="P_led_date"></span></td>
+                            </tr>	
+                            <tr>  
+                                <td><input type="checkbox" id="isLedTemp"></td>	
+                            <td>
+                                <select id="tempFrom">
+									<option value="0"> 00:00 </option>
+									<option value="0.3"> 00:30 </option>
+									<option value="1"> 01:00 </option>
+									<option value="1.3"> 01:30 </option>
+									<option value="2"> 02:00 </option>
+									<option value="2.3"> 02:30 </option>
+									<option value="3"> 03:00 </option>
+									<option value="3.3"> 03:30 </option>
+									<option value="4"> 04:00 </option>
+									<option value="4.3"> 04:30 </option>
+									<option value="5"> 05:00 </option>
+									<option value="5.3"> 05:30 </option>
+									<option value="6"> 06:00 </option>
+									<option value="6.3"> 06:30 </option>
+									<option value="7"> 07:00 </option>
+									<option value="7.3"> 07:30 </option>
+									<option value="8"> 08:00 </option>
+									<option value="8.3"> 08:30 </option>
+									<option value="9"> 09:00 </option>
+									<option value="9.3"> 09:30 </option>
+									<option value="10"> 10:00 </option>
+									<option value="10.3"> 10:30 </option>
+									<option value="11"> 11:00 </option>
+									<option value="11.3"> 11:30 </option>
+									<option value="12"> 12:00 </option>
+									<option value="12.3"> 12:30 </option>
+									<option value="13"> 13:00 </option>
+									<option value="13.3"> 13:30 </option>
+									<option value="14"> 14:00 </option>
+									<option value="14.3"> 14:30 </option>
+									<option value="15"> 15:00 </option>
+									<option value="15.3"> 15:30 </option>
+									<option value="16"> 16:00 </option>
+									<option value="16.3"> 16:30 </option>
+									<option value="17"> 17:00 </option>
+									<option value="17.3"> 17:30 </option>
+									<option value="18"> 18:00 </option>
+									<option value="18.3"> 18:30 </option>
+									<option value="19"> 19:00 </option>
+									<option value="19.3"> 19:30 </option>
+									<option value="20"> 20:00 </option>
+									<option value="20.3"> 20:30 </option>
+									<option value="21"> 21:00 </option>
+									<option value="21.3"> 21:30 </option>
+									<option value="22"> 22:00 </option>
+									<option value="22.3"> 22:30 </option>
+									<option value="23"> 23:00 </option>
+									<option value="23.3"> 23:30 </option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="tempTo">
+									<option value="0.3"> 00:30 </option>
+									<option value="1"> 01:00 </option>
+									<option value="1.3"> 01:30 </option>
+									<option value="2"> 02:00 </option>
+									<option value="2.3"> 02:30 </option>
+									<option value="3"> 03:00 </option>
+									<option value="3.3"> 03:30 </option>
+									<option value="4"> 04:00 </option>
+									<option value="4.3"> 04:30 </option>
+									<option value="5"> 05:00 </option>
+									<option value="5.3"> 05:30 </option>
+									<option value="6"> 06:00 </option>
+									<option value="6.3"> 06:30 </option>
+									<option value="7"> 07:00 </option>
+									<option value="7.3"> 07:30 </option>
+									<option value="8"> 08:00 </option>
+									<option value="8.3"> 08:30 </option>
+									<option value="9"> 09:00 </option>
+									<option value="9.3"> 09:30 </option>
+									<option value="10"> 10:00 </option>
+									<option value="10.3"> 10:30 </option>
+									<option value="11"> 11:00 </option>
+									<option value="11.3"> 11:30 </option>
+									<option value="12"> 12:00 </option>
+									<option value="12.3"> 12:30 </option>
+									<option value="13"> 13:00 </option>
+									<option value="13.3"> 13:30 </option>
+									<option value="14"> 14:00 </option>
+									<option value="14.3"> 14:30 </option>
+									<option value="15"> 15:00 </option>
+									<option value="15.3"> 15:30 </option>
+									<option value="16"> 16:00 </option>
+									<option value="16.3"> 16:30 </option>
+									<option value="17"> 17:00 </option>
+									<option value="17.3"> 17:30 </option>
+									<option value="18"> 18:00 </option>
+									<option value="18.3"> 18:30 </option>
+									<option value="19"> 19:00 </option>
+									<option value="19.3"> 19:30 </option>
+									<option value="20"> 20:00 </option>
+									<option value="20.3"> 20:30 </option>
+									<option value="21"> 21:00 </option>
+									<option value="21.3"> 21:30 </option>
+									<option value="22"> 22:00 </option>
+									<option value="22.3"> 22:30 </option>
+									<option value="23"> 23:00 </option>
+									<option value="23.3"> 23:30 </option>
+									<option value="24"> 24:00 </option>
+                                </select>
+							</td>	
+							<td>
+                                <select id="tempColor">
+									<option value="1"> Red </option>
+									<option value="2"> Orange </option>
+									<option value="3"> Yellow </option>
+									<option value="4"> Green </option>
+									<option value="5"> Gyan </option>
+									<option value="6"> Blue </option>
+									<option value="7"> Purple </option>
+									<option value="8"> White </option>
+                                </select>
+                            </td>														
+                                <td align = "left"><span class="opt_cn" id="P_led_Temp"></span></td>
+							</tr>
+							<tr>  
+                                <td><input type="checkbox" id="isLedHum"></td>	
+                            <td>
+                                <select id="humFrom">
+									<option value="0"> 00:00 </option>
+									<option value="0.3"> 00:30 </option>
+									<option value="1"> 01:00 </option>
+									<option value="1.3"> 01:30 </option>
+									<option value="2"> 02:00 </option>
+									<option value="2.3"> 02:30 </option>
+									<option value="3"> 03:00 </option>
+									<option value="3.3"> 03:30 </option>
+									<option value="4"> 04:00 </option>
+									<option value="4.3"> 04:30 </option>
+									<option value="5"> 05:00 </option>
+									<option value="5.3"> 05:30 </option>
+									<option value="6"> 06:00 </option>
+									<option value="6.3"> 06:30 </option>
+									<option value="7"> 07:00 </option>
+									<option value="7.3"> 07:30 </option>
+									<option value="8"> 08:00 </option>
+									<option value="8.3"> 08:30 </option>
+									<option value="9"> 09:00 </option>
+									<option value="9.3"> 09:30 </option>
+									<option value="10"> 10:00 </option>
+									<option value="10.3"> 10:30 </option>
+									<option value="11"> 11:00 </option>
+									<option value="11.3"> 11:30 </option>
+									<option value="12"> 12:00 </option>
+									<option value="12.3"> 12:30 </option>
+									<option value="13"> 13:00 </option>
+									<option value="13.3"> 13:30 </option>
+									<option value="14"> 14:00 </option>
+									<option value="14.3"> 14:30 </option>
+									<option value="15"> 15:00 </option>
+									<option value="15.3"> 15:30 </option>
+									<option value="16"> 16:00 </option>
+									<option value="16.3"> 16:30 </option>
+									<option value="17"> 17:00 </option>
+									<option value="17.3"> 17:30 </option>
+									<option value="18"> 18:00 </option>
+									<option value="18.3"> 18:30 </option>
+									<option value="19"> 19:00 </option>
+									<option value="19.3"> 19:30 </option>
+									<option value="20"> 20:00 </option>
+									<option value="20.3"> 20:30 </option>
+									<option value="21"> 21:00 </option>
+									<option value="21.3"> 21:30 </option>
+									<option value="22"> 22:00 </option>
+									<option value="22.3"> 22:30 </option>
+									<option value="23"> 23:00 </option>
+									<option value="23.3"> 23:30 </option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="humTo">
+									<option value="0.3"> 00:30 </option>
+									<option value="1"> 01:00 </option>
+									<option value="1.3"> 01:30 </option>
+									<option value="2"> 02:00 </option>
+									<option value="2.3"> 02:30 </option>
+									<option value="3"> 03:00 </option>
+									<option value="3.3"> 03:30 </option>
+									<option value="4"> 04:00 </option>
+									<option value="4.3"> 04:30 </option>
+									<option value="5"> 05:00 </option>
+									<option value="5.3"> 05:30 </option>
+									<option value="6"> 06:00 </option>
+									<option value="6.3"> 06:30 </option>
+									<option value="7"> 07:00 </option>
+									<option value="7.3"> 07:30 </option>
+									<option value="8"> 08:00 </option>
+									<option value="8.3"> 08:30 </option>
+									<option value="9"> 09:00 </option>
+									<option value="9.3"> 09:30 </option>
+									<option value="10"> 10:00 </option>
+									<option value="10.3"> 10:30 </option>
+									<option value="11"> 11:00 </option>
+									<option value="11.3"> 11:30 </option>
+									<option value="12"> 12:00 </option>
+									<option value="12.3"> 12:30 </option>
+									<option value="13"> 13:00 </option>
+									<option value="13.3"> 13:30 </option>
+									<option value="14"> 14:00 </option>
+									<option value="14.3"> 14:30 </option>
+									<option value="15"> 15:00 </option>
+									<option value="15.3"> 15:30 </option>
+									<option value="16"> 16:00 </option>
+									<option value="16.3"> 16:30 </option>
+									<option value="17"> 17:00 </option>
+									<option value="17.3"> 17:30 </option>
+									<option value="18"> 18:00 </option>
+									<option value="18.3"> 18:30 </option>
+									<option value="19"> 19:00 </option>
+									<option value="19.3"> 19:30 </option>
+									<option value="20"> 20:00 </option>
+									<option value="20.3"> 20:30 </option>
+									<option value="21"> 21:00 </option>
+									<option value="21.3"> 21:30 </option>
+									<option value="22"> 22:00 </option>
+									<option value="22.3"> 22:30 </option>
+									<option value="23"> 23:00 </option>
+									<option value="23.3"> 23:30 </option>
+									<option value="24"> 24:00 </option>
+                                </select>
+							</td>	
+							<td>
+                                <select id="humColor">
+									<option value="1"> Red </option>
+									<option value="2"> Orange </option>
+									<option value="3"> Yellow </option>
+									<option value="4"> Green </option>
+									<option value="5"> Gyan </option>
+									<option value="6"> Blue </option>
+									<option value="7"> Purple </option>
+									<option value="8"> White </option>
+                                </select>
+                            </td>														
+                                <td align = "left"><span class="opt_cn" id="P_led_Hum"></span></td>
+							</tr>
+							<tr>  
+                                <td><input type="checkbox" id="isLedPres"></td>	
+                            <td>
+                                <select id="presFrom">
+									<option value="0"> 00:00 </option>
+									<option value="0.3"> 00:30 </option>
+									<option value="1"> 01:00 </option>
+									<option value="1.3"> 01:30 </option>
+									<option value="2"> 02:00 </option>
+									<option value="2.3"> 02:30 </option>
+									<option value="3"> 03:00 </option>
+									<option value="3.3"> 03:30 </option>
+									<option value="4"> 04:00 </option>
+									<option value="4.3"> 04:30 </option>
+									<option value="5"> 05:00 </option>
+									<option value="5.3"> 05:30 </option>
+									<option value="6"> 06:00 </option>
+									<option value="6.3"> 06:30 </option>
+									<option value="7"> 07:00 </option>
+									<option value="7.3"> 07:30 </option>
+									<option value="8"> 08:00 </option>
+									<option value="8.3"> 08:30 </option>
+									<option value="9"> 09:00 </option>
+									<option value="9.3"> 09:30 </option>
+									<option value="10"> 10:00 </option>
+									<option value="10.3"> 10:30 </option>
+									<option value="11"> 11:00 </option>
+									<option value="11.3"> 11:30 </option>
+									<option value="12"> 12:00 </option>
+									<option value="12.3"> 12:30 </option>
+									<option value="13"> 13:00 </option>
+									<option value="13.3"> 13:30 </option>
+									<option value="14"> 14:00 </option>
+									<option value="14.3"> 14:30 </option>
+									<option value="15"> 15:00 </option>
+									<option value="15.3"> 15:30 </option>
+									<option value="16"> 16:00 </option>
+									<option value="16.3"> 16:30 </option>
+									<option value="17"> 17:00 </option>
+									<option value="17.3"> 17:30 </option>
+									<option value="18"> 18:00 </option>
+									<option value="18.3"> 18:30 </option>
+									<option value="19"> 19:00 </option>
+									<option value="19.3"> 19:30 </option>
+									<option value="20"> 20:00 </option>
+									<option value="20.3"> 20:30 </option>
+									<option value="21"> 21:00 </option>
+									<option value="21.3"> 21:30 </option>
+									<option value="22"> 22:00 </option>
+									<option value="22.3"> 22:30 </option>
+									<option value="23"> 23:00 </option>
+									<option value="23.3"> 23:30 </option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="presTo">
+									<option value="0.3"> 00:30 </option>
+									<option value="1"> 01:00 </option>
+									<option value="1.3"> 01:30 </option>
+									<option value="2"> 02:00 </option>
+									<option value="2.3"> 02:30 </option>
+									<option value="3"> 03:00 </option>
+									<option value="3.3"> 03:30 </option>
+									<option value="4"> 04:00 </option>
+									<option value="4.3"> 04:30 </option>
+									<option value="5"> 05:00 </option>
+									<option value="5.3"> 05:30 </option>
+									<option value="6"> 06:00 </option>
+									<option value="6.3"> 06:30 </option>
+									<option value="7"> 07:00 </option>
+									<option value="7.3"> 07:30 </option>
+									<option value="8"> 08:00 </option>
+									<option value="8.3"> 08:30 </option>
+									<option value="9"> 09:00 </option>
+									<option value="9.3"> 09:30 </option>
+									<option value="10"> 10:00 </option>
+									<option value="10.3"> 10:30 </option>
+									<option value="11"> 11:00 </option>
+									<option value="11.3"> 11:30 </option>
+									<option value="12"> 12:00 </option>
+									<option value="12.3"> 12:30 </option>
+									<option value="13"> 13:00 </option>
+									<option value="13.3"> 13:30 </option>
+									<option value="14"> 14:00 </option>
+									<option value="14.3"> 14:30 </option>
+									<option value="15"> 15:00 </option>
+									<option value="15.3"> 15:30 </option>
+									<option value="16"> 16:00 </option>
+									<option value="16.3"> 16:30 </option>
+									<option value="17"> 17:00 </option>
+									<option value="17.3"> 17:30 </option>
+									<option value="18"> 18:00 </option>
+									<option value="18.3"> 18:30 </option>
+									<option value="19"> 19:00 </option>
+									<option value="19.3"> 19:30 </option>
+									<option value="20"> 20:00 </option>
+									<option value="20.3"> 20:30 </option>
+									<option value="21"> 21:00 </option>
+									<option value="21.3"> 21:30 </option>
+									<option value="22"> 22:00 </option>
+									<option value="22.3"> 22:30 </option>
+									<option value="23"> 23:00 </option>
+									<option value="23.3"> 23:30 </option>
+									<option value="24"> 24:00 </option>
+                                </select>
+							</td>	
+							<td>
+                                <select id="presColor">
+									<option value="1"> Red </option>
+									<option value="2"> Orange </option>
+									<option value="3"> Yellow </option>
+									<option value="4"> Green </option>
+									<option value="5"> Gyan </option>
+									<option value="6"> Blue </option>
+									<option value="7"> Purple </option>
+									<option value="8"> White </option>
+                                </select>
+                            </td>														
+                                <td align = "left"><span class="opt_cn" id="P_led_Pres"></span></td>
+                            </tr>								
+						</table>
+						<label class="switch"><span class="opt_cn" id="P_led_onlyclock"></span>
+							<input type="checkbox" id="onlyClockNight">
+							<span class="switch-btn"></span>
+						</label><br>
+                    </center>				
+				<br>
+				<paragraph><span class="opt_cn" id="P_led_textsOnOff"></span></paragraph>
+                <center>
+                    <table id="table__font">
+                        <tr>
+                            <td><span class="opt_cn" id="P_led_textstart"></span></td>
+                            <td>
+                                <select id="global_start">
+									<option value="0"> 00:00 </option>
+									<option value="0.3"> 00:30 </option>
+									<option value="1"> 01:00 </option>
+									<option value="1.3"> 01:30 </option>
+									<option value="2"> 02:00 </option>
+									<option value="2.3"> 02:30 </option>
+									<option value="3"> 03:00 </option>
+									<option value="3.3"> 03:30 </option>
+									<option value="4"> 04:00 </option>
+									<option value="4.3"> 04:30 </option>
+									<option value="5"> 05:00 </option>
+									<option value="5.3"> 05:30 </option>
+									<option value="6"> 06:00 </option>
+									<option value="6.3"> 06:30 </option>
+									<option value="7"> 07:00 </option>
+									<option value="7.3"> 07:30 </option>
+									<option value="8"> 08:00 </option>
+									<option value="8.3"> 08:30 </option>
+									<option value="9"> 09:00 </option>
+									<option value="9.3"> 09:30 </option>
+									<option value="10"> 10:00 </option>
+									<option value="10.3"> 10:30 </option>
+									<option value="11"> 11:00 </option>
+									<option value="11.3"> 11:30 </option>
+									<option value="12"> 12:00 </option>
+									<option value="12.3"> 12:30 </option>
+									<option value="13"> 13:00 </option>
+									<option value="13.3"> 13:30 </option>
+									<option value="14"> 14:00 </option>
+									<option value="14.3"> 14:30 </option>
+									<option value="15"> 15:00 </option>
+									<option value="15.3"> 15:30 </option>
+									<option value="16"> 16:00 </option>
+									<option value="16.3"> 16:30 </option>
+									<option value="17"> 17:00 </option>
+									<option value="17.3"> 17:30 </option>
+									<option value="18"> 18:00 </option>
+									<option value="18.3"> 18:30 </option>
+									<option value="19"> 19:00 </option>
+									<option value="19.3"> 19:30 </option>
+									<option value="20"> 20:00 </option>
+									<option value="20.3"> 20:30 </option>
+									<option value="21"> 21:00 </option>
+									<option value="21.3"> 21:30 </option>
+									<option value="22"> 22:00 </option>
+									<option value="22.3"> 22:30 </option>
+									<option value="23"> 23:00 </option>
+									<option value="23.3"> 23:30 </option>
+                                </select>
+                            </td>
+                            <td><span class="opt_cn" id="P_led_textstop"></span></td>
+                            <td>
+                                <select id="global_stop">
+									<option value="0"> 00:00 </option>
+									<option value="0.3"> 00:30 </option>
+									<option value="1"> 01:00 </option>
+									<option value="1.3"> 01:30 </option>
+									<option value="2"> 02:00 </option>
+									<option value="2.3"> 02:30 </option>
+									<option value="3"> 03:00 </option>
+									<option value="3.3"> 03:30 </option>
+									<option value="4"> 04:00 </option>
+									<option value="4.3"> 04:30 </option>
+									<option value="5"> 05:00 </option>
+									<option value="5.3"> 05:30 </option>
+									<option value="6"> 06:00 </option>
+									<option value="6.3"> 06:30 </option>
+									<option value="7"> 07:00 </option>
+									<option value="7.3"> 07:30 </option>
+									<option value="8"> 08:00 </option>
+									<option value="8.3"> 08:30 </option>
+									<option value="9"> 09:00 </option>
+									<option value="9.3"> 09:30 </option>
+									<option value="10"> 10:00 </option>
+									<option value="10.3"> 10:30 </option>
+									<option value="11"> 11:00 </option>
+									<option value="11.3"> 11:30 </option>
+									<option value="12"> 12:00 </option>
+									<option value="12.3"> 12:30 </option>
+									<option value="13"> 13:00 </option>
+									<option value="13.3"> 13:30 </option>
+									<option value="14"> 14:00 </option>
+									<option value="14.3"> 14:30 </option>
+									<option value="15"> 15:00 </option>
+									<option value="15.3"> 15:30 </option>
+									<option value="16"> 16:00 </option>
+									<option value="16.3"> 16:30 </option>
+									<option value="17"> 17:00 </option>
+									<option value="17.3"> 17:30 </option>
+									<option value="18"> 18:00 </option>
+									<option value="18.3"> 18:30 </option>
+									<option value="19"> 19:00 </option>
+									<option value="19.3"> 19:30 </option>
+									<option value="20"> 20:00 </option>
+									<option value="20.3"> 20:30 </option>
+									<option value="21"> 21:00 </option>
+									<option value="21.3"> 21:30 </option>
+									<option value="22"> 22:00 </option>
+									<option value="22.3"> 22:30 </option>
+									<option value="23"> 23:00 </option>
+									<option value="23.3"> 23:30 </option>
+									<option value="24"> 24:00 </option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </center>
+                <br>
+                <span class="save_booton" id="save" onclick="set_ledoption(this);"></span>
+				
+				<titles>
+					<span class="opt_cn" id="P_setup_title"></span>
+				</titles>
+                <center>
+                    <table>
+                        <tr>
+                            <td align = "right"><span class="opt_cn" id="P_setup_dmfrom"></span></td>
+                            <td><select id = "dmodefrom">
+                                <option value = "0"> 0 </option>
+                                <option value = "1"> 1 </option>
+                                <option value = "2"> 2 </option>
+                                <option value = "3"> 3 </option>
+                                <option value = "4"> 4 </option>
+                                <option value = "5"> 5 </option>
+                                <option value = "6"> 6 </option>
+                                <option value = "7"> 7 </option>
+                                <option value = "8"> 8 </option>
+                                <option value = "9"> 9 </option>
+                                <option value = "10"> 10 </option>
+                                <option value = "11"> 11 </option>
+                                <option value = "12"> 12 </option>
+                                <option value = "13"> 13 </option>
+                                <option value = "14"> 14 </option>
+                                <option value = "15"> 15 </option>
+                                <option value = "16"> 16 </option>
+                                <option value = "17"> 17 </option>
+                                <option value = "18"> 18 </option>
+                                <option value = "19"> 19 </option>
+                                <option value = "20"> 20 </option>
+                                <option value = "21"> 21 </option>
+                                <option value = "22"> 22 </option>
+                                <option value = "23"> 23 </option>
+                            </select></td>
+                            <td align = "right"><span class="opt_cn" id="P_setup_dmto"></span></td>
+                            <td><select id = "dmodeto">
+                                <option value = "1"> 1 </option>
+                                <option value = "2"> 2 </option>
+                                <option value = "3"> 3 </option>
+                                <option value = "4"> 4 </option>
+                                <option value = "5"> 5 </option>
+                                <option value = "6"> 6 </option>
+                                <option value = "7"> 7 </option>
+                                <option value = "8"> 8 </option>
+                                <option value = "9"> 9 </option>
+                                <option value = "10"> 10 </option>
+                                <option value = "11"> 11 </option>
+                                <option value = "12"> 12 </option>
+                                <option value = "13"> 13 </option>
+                                <option value = "14"> 14 </option>
+                                <option value = "15"> 15 </option>
+                                <option value = "16"> 16 </option>
+                                <option value = "17"> 17 </option>
+                                <option value = "18"> 18 </option>
+                                <option value = "19"> 19 </option>
+                                <option value = "20"> 20 </option>
+                                <option value = "21"> 21 </option>
+                                <option value = "22"> 22 </option>
+                                <option value = "23"> 23 </option>
+                                <option value = "24"> 24 </option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td align = "right"><span class="opt_cn" id="P_setup_brightday"></span></td>
+                            <td><select id = "brightd">
+                                <option value = "0"> 0 </option>
+                                <option value = "1"> 1 </option>
+                                <option value = "2"> 2 </option>
+                                <option value = "3"> 3 </option>
+                                <option value = "4"> 4 </option>
+                                <option value = "5"> 5 </option>
+                                <option value = "6"> 6 </option>
+                                <option value = "7"> 7 </option>
+                                <option value = "8"> 8 </option>
+                                <option value = "9"> 9 </option>
+                                <option value = "10"> 10 </option>
+                                <option value = "11"> 11 </option>
+                                <option value = "12"> 12 </option>
+                                <option value = "13"> 13 </option>
+                                <option value = "14"> 14 </option>
+                                <option value = "15"> 15 </option>
+                            </select></td>
+                            <td align = "right"><span class="opt_cn" id="P_setup_brightnight"></span></td>
+                            <td><select id = "brightn">
+                                <option value = "0"> 0 </option>
+                                <option value = "1"> 1 </option>
+                                <option value = "2"> 2 </option>
+                                <option value = "3"> 3 </option>
+                                <option value = "4"> 4 </option>
+                                <option value = "5"> 5 </option>
+                                <option value = "6"> 6 </option>
+                                <option value = "7"> 7 </option>
+                                <option value = "8"> 8 </option>
+                                <option value = "9"> 9 </option>
+                                <option value = "10"> 10 </option>
+                                <option value = "11"> 11 </option>
+                                <option value = "12"> 12 </option>
+                                <option value = "13"> 13 </option>
+                                <option value = "14"> 14 </option>
+                                <option value = "15"> 15 </option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                    </table>
+                    <label class="switch"><span class="opt_cn" id="P_setup_vba"></span>
+                        <input type="checkbox" id="autoBright">
+                        <span class="switch-btn"></span>
+                    </label><br><br>
+					<span class="save_booton" id="save1" onclick="set_led(this);"></span>
+					<br><br>								
+                </center>
+				
+				
+            </div>
+            <div class="menu_unit" id="langs">
+                <a><span class="ico__text" onclick="set_lang_f(this, 'EN');">EN</span></a>			
+                <a><span class="ico__text" onclick="set_lang_f(this, 'RU');">RU</span></a>
+                <a><span class="ico__text" onclick="set_lang_f(this, 'BG');">BG</span></a>
+            </div>
+        </central-unit>
+    </body>
+</html>
