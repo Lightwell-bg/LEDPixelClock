@@ -82,11 +82,11 @@ All clock management is carried out using a web browser. On first power-up, LW-C
 
 For Wi-Fi network connection please input its SSID and password. After successful connection LW-Clock will begin to receive and transmit information over the Internet. NTP servers are used to get accurate time. To transmit temperature, humidity and barometric pressure data you can use the MQTT server https://www.cloudmqtt.com/ and the server https://thingspeak.com. You can also transmit information for display on the clock in the form of a creeping line through the MQTT server.
 
-![](https://github.com/Lightwell-bg/LEDPixelClock/blob/master/3DPrint/LPC-011.jpg)
-![](https://github.com/Lightwell-bg/LEDPixelClock/blob/master/3DPrint/LPC-012.jpg)
-![](https://github.com/Lightwell-bg/LEDPixelClock/blob/master/3DPrint/LPC-02.jpg)
-![](https://github.com/Lightwell-bg/LEDPixelClock/blob/master/3DPrint/LPC-03.jpg)
-![](https://github.com/Lightwell-bg/LEDPixelClock/blob/master/3DPrint/LPC-04.jpg)
-![](https://github.com/Lightwell-bg/LEDPixelClock/blob/master/3DPrint/LPC-05.jpg)
-![](https://github.com/Lightwell-bg/LEDPixelClock/blob/master/3DPrint/LPC-06.jpg)
-![](https://github.com/Lightwell-bg/LEDPixelClock/blob/master/3DPrint/LPC-07.jpg)
+![](https://github.com/Lightwell-bg/LEDPixelClock/blob/master/images/LPC-011.jpg)
+![](https://github.com/Lightwell-bg/LEDPixelClock/blob/master/images/LPC-012.jpg)
+![](https://github.com/Lightwell-bg/LEDPixelClock/blob/master/images/LPC-02.jpg)
+![](https://github.com/Lightwell-bg/LEDPixelClock/blob/master/images/LPC-03.jpg)
+![](https://github.com/Lightwell-bg/LEDPixelClock/blob/master/images/LPC-04.jpg)
+![](https://github.com/Lightwell-bg/LEDPixelClock/blob/master/images/LPC-05.jpg)
+![](https://github.com/Lightwell-bg/LEDPixelClock/blob/master/images/LPC-06.jpg)
+![](https://github.com/Lightwell-bg/LEDPixelClock/blob/master/images/LPC-07.jpg)
