@@ -19,7 +19,8 @@ void setup() {
     loadConfig(); Serial.println(F("FileConfig init"));
     myWIFI.begin(ssid.c_str(), password.c_str(), SSDP_Name.c_str(), ssidAP.c_str(), passwordAP.c_str(), apIP.c_str()); Serial.println(F("Wi-Fi init"));
     Serial.printf("Ready! Open http://%s.local in your browser\n", host); 
-    myESPTime.begin(timezone, isDayLightSaving, sNtpServerName, sNtpServerName2, sNtpServerName3, useRTC, updateRTCfromNTP); Serial.println(F("Start Time"));  
+    myESPTime.begin(timezone, isDayLightSaving, sNtpServerName, sNtpServerName2, sNtpServerName3, useRTC, updateRTCfromNTP); Serial.println(F("Start Time"));
+    //myESPTime.setTimeRule(Last, Sun, Oct, 3, timezone*SECS_PER_HOUR, Last, Sun, Mar, 2, timezone*SECS_PER_HOUR+daylightOffset_sec);  
     init_firmWareUpdate(); Serial.println(F("Start init FirmWare update"));
     SSDP_Name = myWIFI.getNameSSDP(); Serial.println(SSDP_Name);
     mySSDP.begin(SSDP_Name.c_str(), "000000001", modelName.c_str(), nVersion.c_str(), "LIGHTWELL", "https://diy.led-lightwell.eu"); Serial.println(F("Start init SSDP"));

@@ -34,8 +34,8 @@ void showDate() {
 }
 
 void showTemp() {
-    int temp1000 = getTempBME280()*100; 
-    dataToArray(temp1000, colorStripRGB(&tempColor), STEMP, 0);
+    int temp1000 = getTempBME280()*10;
+    dataToArray(temp1000, colorStripRGB(&tempColor), STEMP, 1);
     strip.show(); 
 }
 
@@ -75,7 +75,7 @@ void dataToArray(int data, uint32_t ledColor, edataArrType showType, uint8_t dot
       if (i==1) {
         //Serial.print("Digit 4 is : "); Serial.print(digit); Serial.print(" ");
         cursor =23;
-        if (showType == STEMP) {digit = 11;}
+        if (showType == STEMP) {digit = 10;} //grad
         if (showType == SHUM) {digit = 12;}
         if (showType == SPRES) {digit = 13;}
         for(uint8_t k=0; k<=6; k++) { 
@@ -89,7 +89,8 @@ void dataToArray(int data, uint32_t ledColor, edataArrType showType, uint8_t dot
       else if (i==2) {
         //Serial.print("Digit 3 is : ");Serial.print(digit);Serial.print(" ");
         cursor -=14;
-        if (showType == STEMP || showType == SHUM) {digit = 10;}
+        //if (showType == STEMP || showType == SHUM) {digit = 10;}
+        if (showType == SHUM) {digit = 10;}
         for(uint8_t k=0; k<=6; k++){ 
           //Serial.print(digits[digit][k]);
           if (digits[digit][k]== 1) {strip.setPixelColor(cursor, ledColor);}

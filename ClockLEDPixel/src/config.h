@@ -54,8 +54,8 @@ String filePath = "/myConfig.json"; //File for config
 String jsonConfig = "{}";
 
 // wifi
-String ssid = "ssid";
-String password = "password";
+String ssid = "";
+String password = "";
 String ssidAP = "LED2811";   // SSID AP точки доступа
 String passwordAP = ""; // пароль точки доступа
 String SSDP_Name = "LED2811"; // Имя SSDP
@@ -119,8 +119,8 @@ char mqttData[80]; //Данные для передачи на MQTT
 bool mqttOn = false;
 String mqtt_server = "hairdresser.cloudmqtt.com"; // Имя сервера MQTT
 int mqtt_port = 18695; // Порт для подключения к серверу MQTT
-String mqtt_user = "user"; // Логи от сервер
-String mqtt_pass = "pass"; // Пароль от сервера QvKr_jbEsHYb
+String mqtt_user = ""; // Логи от сервер
+String mqtt_pass = ""; // Пароль от сервера QvKr_jbEsHYb
 String mqtt_name = "LED2811"; 
 String mqtt_Temp = mqtt_name + "/temp";
 String mqtt_Hum = mqtt_name + "/hum";
@@ -130,8 +130,8 @@ const unsigned long MQTT_SEND_INT = 1000*60*11; //Интервал отправ�
 //thingspeak.com
 bool tspeakOn = false;
 String tspeak_server = "api.thingspeak.com";
-unsigned long tspeak_channal = 963393;
-String tspeak_wapi = "11111";  
+unsigned long tspeak_channal = 9633;
+String tspeak_wapi = "";  
 const unsigned long TSPEAK_SEND_INT = 1000*60*10;
 
 #endif

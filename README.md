@@ -1,4 +1,4 @@
-# LED Pixel Clock (Clock, temperature, humidity, atmospheric pressure, and remote monitoring)
+# LED Pixel Clock (Clock, alarms, temperature, humidity, atmospheric pressure, and remote monitoring)
 Multifunctional clock based on ESP8266 and WS2811 addressable LEDs for Home Automation (IoT)
 
 ------------
@@ -31,7 +31,7 @@ The LED Pixel Clock is a four digit clock made up of 30 WS2811 addressable LEDs 
 Note: Using the links provided here help to support these types of projects. Thank you for the support.
 
 **You can purchase a PCB with soldered elements and connectors for connecting the indicator and sensors, or just a PCB and a set of elements for installation**
-https://diy.led-lightwell.eu/
+https://diy.led-lightwell.eu/product/led-pixel-clock-shield-for-esp8266/
 
 ## Schematics / Assembly
 | Component  | Pins  |  Wemos D1 Mini |

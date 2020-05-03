@@ -209,7 +209,8 @@ void init_HTTPServer(void) {
         timeman.tm_mon = mon_s - 1;
         timeman.tm_year = year_s - 1900; 
         epoch_time = mktime(&timeman);
-        printf("Setting time: %s", asctime(&timeman));  
+        printf("Setting time: %s", asctime(&timeman)); 
+        Serial.print(F("Setting time UNIX: ")); Serial.println(epoch_time);   
         useRTC = true;
         myESPTime.setTimeParam(useRTC, timezone, isDayLightSaving, sNtpServerName);
         //myESPTime.setTimeRTC(year_s, mon_s, mday_s, hour_s, min_s, sec_s);

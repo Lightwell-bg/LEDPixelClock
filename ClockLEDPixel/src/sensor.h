@@ -60,8 +60,8 @@ String getHumDHT() {
 
 #if USE_BME280 == true // I2C D1, D2
 int getTempBME280() {
-  float tempBME = bme280.readTempC();
-  Serial.print("Temperature: "); Serial.print(tempBME); Serial.println("°C"); 
+  float tempBME = bme280.readTempC()*10;
+  Serial.print("Temperature: "); Serial.print(tempBME/10); Serial.println("°C"); 
   return (int)round(tempBME);
 }
 
